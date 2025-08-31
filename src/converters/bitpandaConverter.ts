@@ -8,6 +8,13 @@ import { GhostfolioOrderType } from "../models/ghostfolioOrderType";
 
 export class BitpandaConverter extends AbstractConverter {
     /**
+     * Converts grams to troy ounces.
+     * 1 troy ounce = 31.1034768 grams
+     */
+    private gramsToTroyOunces(grams: number): number {
+        return grams / 31.1034768;
+    }
+    /**
      * Maps Bitpanda asset symbols to Yahoo-compatible symbols.
      */
     private mapBitpandaSymbolToYahoo(asset: string): string {
@@ -92,15 +99,20 @@ export class BitpandaConverter extends AbstractConverter {
                         bar1.increment();
                         continue;
                     }
-                    // Compose symbol based on asset class
+                    // Convert symbol, amount, unit price based on asset class
                     let symbol: string | undefined = undefined;
                     const assetClass = record.assetClass ? record.assetClass.toLowerCase() : "";
+                    let quantity = record.amountAsset;
+                    let unitPrice = record.assetMarketPrice;
                     if (assetClass === "cryptocurrency") {
                             const yahooAsset = this.mapBitpandaSymbolToYahoo(record.asset);
                             symbol = `${yahooAsset}USD`;
                     } else if (assetClass === "stock (derivative)") {
                         symbol = record.asset;
                     } else if (assetClass === "metal") {
+                        // Convert grams to troy ounces for both quantity and unit price
+                        quantity = this.gramsToTroyOunces(quantity);
+                        unitPrice = unitPrice * 31.1034768; // price per troy ounce
                         // Lookup symbol from Yahoo for metals
                         try {
                             const security = await this.securityService.getSecurity(
@@ -121,23 +133,55 @@ export class BitpandaConverter extends AbstractConverter {
                             symbol = record.asset;
                         }
                     } else {
-                        // fallback: use asset
                         symbol = record.asset;
                     }
                     // Parse date
                     const date = dayjs(record.timestamp);
-                    result.activities.push({
-                        accountId: process.env.GHOSTFOLIO_ACCOUNT_ID,
-                        comment: "",
-                        fee: record.fee,
-                        quantity: record.amountAsset,
-                        type: GhostfolioOrderType[type],
-                        unitPrice: record.assetMarketPrice,
-                        currency: record.assetMarketPriceCurrency || record.fiat,
-                        dataSource: "YAHOO",
-                        date: date.format("YYYY-MM-DDTHH:mm:ssZ"),
-                        symbol: symbol
-                    });
+
+                    // Add activities to result
+                    if (type == "interest") {
+                        // For staking reward transactions, two activities need to be added
+                        // Reward in fiat currency
+                        result.activities.push({
+                            accountId: process.env.GHOSTFOLIO_ACCOUNT_ID,
+                            comment: `Staking reward ${record.asset}`,
+                            fee: record.fee,
+                            quantity: 1,
+                            type: GhostfolioOrderType[type],
+                            unitPrice: record.amountFiat,
+                            currency: record.fiat,
+                            dataSource: "MANUAL",
+                            date: date.format("YYYY-MM-DDTHH:mm:ssZ"),
+                            symbol: process.env.GHOSTFOLIO_BITPANDA_STAKING_REWARD_ASSET_ID
+                        });
+                        // Fictitions buy transaction for cryptocurrency
+                        result.activities.push({
+                            accountId: process.env.GHOSTFOLIO_ACCOUNT_ID,
+                            comment: "",
+                            fee: 0,
+                            quantity: quantity,
+                            type: GhostfolioOrderType["buy"],
+                            unitPrice: unitPrice,
+                            currency: record.assetMarketPriceCurrency || record.fiat,
+                            dataSource: "YAHOO",
+                            date: date.format("YYYY-MM-DDTHH:mm:ssZ"),
+                            symbol: symbol
+                        });
+                    } else {
+                        // In all other cases, add the corresponding buy/sell activity
+                        result.activities.push({
+                            accountId: process.env.GHOSTFOLIO_ACCOUNT_ID,
+                            comment: "",
+                            fee: record.fee,
+                            quantity: quantity,
+                            type: GhostfolioOrderType[type],
+                            unitPrice: unitPrice,
+                            currency: record.assetMarketPriceCurrency || record.fiat,
+                            dataSource: "YAHOO",
+                            date: date.format("YYYY-MM-DDTHH:mm:ssZ"),
+                            symbol: symbol
+                        });
+                    }
                     bar1.increment();
                 }
                 this.progress.stop();
