@@ -28,6 +28,7 @@ This tool allows you to convert CSV transaction exports to an import file that c
 - [Swissquote](https://en.swissquote.com/)
 - [TradeRepublic](https://traderepublic.com)
 - [Trading 212](https://trading212.com)
+- [TrueWealth](https://truewealth.ch)
 - [XTB](https://www.xtb.com/int)
 
 Is your broker not in the list? Feel free to create an [issue](https://github.com/dickwolff/Export-To-Ghostfolio/issues/new) or, even better, build it yourself and create a [pull request](https://github.com/dickwolff/Export-To-Ghostfolio/compare)! For more info, see [contributing](#contributing).
@@ -157,6 +158,10 @@ Download [`pytr`](https://github.com/pytr-org/pytr/) on your local machine. Afte
 
 Login to your Trading 212 account and create an export file (via History > Download icon). Choose the period from which you wish to export your history and click download.
 
+### TrueWealth
+
+Login to your TrueWealth account. Navigate to "Holdings", then "Transactions" and export as CSV by clicking on "CSV" on the top right.
+
 ### XTB
 
 Login to your XTB account and from the top bar click on "Account history", then "Cash operations". Click the "Export button". Choose the period from which you wish to export your history, select report type "Cash Operations" choose file format "csv" then click "Export Report" button.
@@ -279,6 +284,7 @@ You can now run `npm run start [exporttype]`. See the table with run commands be
 | Swissquote    | `run start swissquote` (or `sq`)    |
 | TradeRepublic | `run start traderepublic` (or `tr`) |
 | Trading 212   | `run start trading212` (or `t212`)  |
+| TrueWealth    | `run start truewealth` (or `tw`)    |
 | XTB           | `run start xtb`                     |
 
 ### Caching
