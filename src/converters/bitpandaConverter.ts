@@ -7,6 +7,16 @@ import { GhostfolioExport } from "../models/ghostfolioExport";
 import { GhostfolioOrderType } from "../models/ghostfolioOrderType";
 
 export class BitpandaConverter extends AbstractConverter {
+    /**
+     * Maps Bitpanda asset symbols to Yahoo-compatible symbols.
+     */
+    private mapBitpandaSymbolToYahoo(asset: string): string {
+        const mapping: Record<string, string> = {
+            // Bitpanda symbol : Yahoo symbol
+            "POL": "MATIC" // Polygon
+        };
+        return mapping[asset] || asset;
+    }
     constructor(securityService: SecurityService) {
         super(securityService);
     }
@@ -86,7 +96,8 @@ export class BitpandaConverter extends AbstractConverter {
                     let symbol: string | undefined = undefined;
                     const assetClass = record.assetClass ? record.assetClass.toLowerCase() : "";
                     if (assetClass === "cryptocurrency") {
-                        symbol = `${record.asset}USD`;
+                            const yahooAsset = this.mapBitpandaSymbolToYahoo(record.asset);
+                            symbol = `${yahooAsset}-USD`;
                     } else if (assetClass === "stock (derivative)") {
                         symbol = record.asset;
                     } else if (assetClass === "metal") {
