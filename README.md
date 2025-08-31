@@ -43,6 +43,10 @@ See the transaction export instructions for each of the supported brokers below.
 
 Login to your Avanza account and click "Min ekonomi". Select the ["Transaktioner tab"](https://www.avanza.se/min-ekonomi/transaktioner.html), then select the desired export timeframe. Finally, click "Exportera transaktioner" to download the CSV file.
 
+### Bitpanda
+
+Login to your Bitpanda account and click on your profile picture at the top right and click on "Transaction history". Next, click on the green "Export" button at the top right, select "Transaction history" once more, and then click on the "Generate CSV" button. Once the file is ready, click on the button with the filename to download the CSV file or click on the download link sent to you via email.
+
 ### Bitvavo
 
 Login to your Bitvavo account and click on your name at the top-right. Next, click "Transaction history". Click the blue "Export" button at the to to create an export. Select one of the CSV options and again click "Export".
@@ -259,6 +263,7 @@ You can now run `npm run start [exporttype]`. See the table with run commands be
 | Exporter      | Run command                         |
 | ------------- | ----------------------------------- |
 | Avanza        | `run start avanza`                  |
+| Bitpanda      | `run start bitpanda` (or `bp`)      |
 | Bitvavo       | `run start bitvavo` (or `bv`)       |
 | BUX           | `run start bux`                     |
 | Coinbase      | `run start coinbase` (or `cb`)      |

@@ -5,6 +5,7 @@ import { SecurityService } from "./securityService";
 import GhostfolioService from "./ghostfolioService";
 import { AbstractConverter } from "./converters/abstractconverter";
 import { AvanzaConverter } from "./converters/avanzaConverter";
+import { BitpandaConverter } from "./converters/bitpandaConverter";
 import { BitvavoConverter } from "./converters/bitvavoConverter";
 import { BuxConverter } from "./converters/buxConverter";
 import { CoinbaseConverter } from "./converters/coinbaseConverter";
@@ -107,6 +108,11 @@ async function createConverter(converterType: string, securityService?: Security
         case "avanza":
             console.log("[i] Processing file using Avanza converter");
             converter = new AvanzaConverter(securityService);
+            break;
+        case "bp":
+        case "bitpanda":
+            console.log("[i] Processing file using Bitpanda converter");
+            converter = new BitpandaConverter(securityService);
             break;
         case "bv":
         case "bitvavo":

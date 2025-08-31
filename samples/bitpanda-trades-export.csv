@@ -1,0 +1,21 @@
+"Disclaimer: All data is without guarantee, errors and changes are reserved."
+"First Name Last Name, YYYY-MM-DD"
+email@domain.com
+"Account opened at: YYYY-MM-DDTHH:mm:ss+Z"
+"Venue: Bitpanda"
+"Reported by Bitpanda GmbH"
+"Transaction ID",Timestamp,"Transaction Type",In/Out,"Amount Fiat",Fiat,"Amount Asset",Asset,"Asset market price","Asset market price currency","Asset class","Product ID",Fee,"Fee asset","Fee percent",Spread,"Spread Currency","Tax Fiat"
+3a84a76d9-b7d7-e025-7cff-b34d178e30ba,2021-03-09T03:12:41+01:00,deposit,incoming,65.00,EUR,-,EUR,-,-,Fiat,-,0.00000000,EUR,-,-,-,0.00
+e85f9e34a-3fdb-ba88-baf5-af2da9da361b,2021-04-21T07:33:12+02:00,transfer,incoming,5.52,EUR,0.00265929,GOOGL,2074.57,EUR,"Stock (derivative)",72,-,-,-,0.00000000,EUR,-
+20bfb8fad-bc68-0350-cd78-8d58ecc44a91,2021-05-04T14:08:55+02:00,buy,outgoing,50.00,EUR,0.01619061,ETH,3088.21,EUR,Cryptocurrency,5,-,-,-,-,-,0.00
+1a451f97a-d448-b626-e802-0f6b48272173,2021-05-01T21:44:03+02:00,transfer,incoming,0.07,EUR,0.03023555,BEST,2.32,EUR,Cryptocurrency,33,-,-,-,-,-,-
+65da73415-ccb7-0414-16c6-2baa6974d90e,2021-05-05T18:22:09+02:00,withdrawal,outgoing,0,EUR,0.00000000,BEST,0.00,-,Cryptocurrency,33,0.50780659,BEST,-,-,-,-
+1d7961204-11f1-a331-6f13-ca00f8cc7a1f,2021-05-13T04:19:28+02:00,sell,incoming,30.00,EUR,0.008942290,ETH,3354.85,EUR,Cryptocurrency,5,-,-,-,-,-,0.00
+0a7270131-d3aa-a05c-7051-8aaf493aa068,2022-07-17T10:37:59+02:00,transfer,incoming,110.03,EUR,0.05052651,GOOGL,2177.70,EUR,"Stock (derivative)",72,-,-,-,0.00000000,EUR,-
+c469605a7-1241-3bb3-0473-b8f60a1a87e9,2023-05-13T15:28:17+02:00,transfer,outgoing,12.09,EUR,0.00724832,ETH,1667.37,EUR,Cryptocurrency,5,-,-,-,-,-,-
+836bd8f30-3e92-c62a-3311-d96398a89684,2023-05-13T20:11:24+02:00,transfer(stake),incoming,12.09,EUR,0.00724832,ETH,1667.36,EUR,Cryptocurrency,5,-,-,-,-,-,-
+9c193c3f1-c3b3-7a02-02d1-5fa1b999ea70,2023-06-13T22:03:36+02:00,reward,incoming,0.31,EUR,0.00018980,ETH,1633.30,EUR,Cryptocurrency,5,-,-,-,-,-
+9e2b312d5-0a76-e8bd-af64-3fe6756eb299,2025-01-09T13:29:18+01:00,buy,outgoing,400.00,EUR,400.00000000,BCPEUR,1.00,EUR,,2941,-,-,-,-,-,0.00
+931bacf4b-b327-1dc2-65ac-a26cb184d73c,2025-01-09T19:55:02+01:00,sell,incoming,50.00,EUR,50.00000000,BCPEUR,1.00,EUR,,2941,-,-,-,-,-,0.00
+0415dbd8b-a659-95df-f6d8-0c2e068b32da,2025-05-12T17:21:13+02:00,sell,incoming,6.87,EUR,0.05318580,GOOGL,129.17,EUR,"Stock (derivative)",72,-,-,-,0.03000000,EUR,0.00
+95722619b-00ab-470d-3483-a7b6f9bdc9d0,2025-06-23T06:18:44+02:00,buy,outgoing,888.93,EUR,10.00000000,Gold,88.89,EUR,Metal,28,-,-,-,-,-,0.00
