@@ -97,7 +97,7 @@ export class BitpandaConverter extends AbstractConverter {
                     const assetClass = record.assetClass ? record.assetClass.toLowerCase() : "";
                     if (assetClass === "cryptocurrency") {
                             const yahooAsset = this.mapBitpandaSymbolToYahoo(record.asset);
-                            symbol = `${yahooAsset}-USD`;
+                            symbol = `${yahooAsset}USD`;
                     } else if (assetClass === "stock (derivative)") {
                         symbol = record.asset;
                     } else if (assetClass === "metal") {
